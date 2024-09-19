@@ -1,0 +1,246 @@
+/* 整體背景設置 */
+body {
+  background-color: #f5f5f5; /* 設置頁面背景色 */
+  font-family: 'Arial', sans-serif; /* 設置字體 */
+ 
+}
+/* App.css */
+.App {
+  font-family: Arial, sans-serif;
+  
+}
+/* Header 樣式 */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #ffffff; /* 白色背景 */
+  background: linear-gradient(to right, #0066cc, #00ccff); /* 漸變背景 */
+  color: white;
+  padding: 10px 0; /* 增加上下內邊距 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+  z-index: 1000;
+}
+
+/* 導航欄列表樣式 */
+.nav-list {
+  list-style-type: none; /* 移除預設列表樣式 */
+  cursor: pointer;
+  display: flex; /* 水平排列 */
+  justify-content: center; /* 導航欄項目居中 */
+  gap: 30px; /* 增加項目間距 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 導航項目樣式 */
+.nav-list li {
+  position: relative; /* 允許添加 hover 下的效果 */
+}
+
+/* 導航鏈接樣式 */
+.nav-list a {
+  text-decoration: none; /* 移除下劃線 */
+  color: white; /* 文字顏色 */
+  font-size: 18px; /* 字體大小 */
+  font-weight: 500; /* 字體粗細 */
+  padding: 10px 15px; /* 增加內邊距 */
+  transition: all 0.3s ease; /* 平滑過渡效果 */
+  border-radius: 5px; /* 圓角 */
+}
+
+/* 導航鏈接的 Hover 樣式 */
+.nav-list a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* 半透明背景 */
+  color: #000; /* 變更文字顏色 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加陰影效果 */
+}
+
+/* 活動狀態樣式，可以根據需要自定義 */
+.nav-list a.active {
+  background-color: rgba(255, 255, 255, 0.3); /* 活動狀態背景 */
+  color: #000;
+}
+
+/* 這是關於我的部分 */
+.About {
+  background-color: #f8f9fa; /* 使用更柔和的背景色 */
+  border: 1px solid #ddd; /* 邊框顏色更淡 */
+  border-radius: 10px; /* 調整圓角 */
+  width: 80%; /* 調整寬度 */
+  max-width: 800px; /* 設置最大寬度，避免太大 */
+  margin: 20px auto; /* 自動居中並增加上下間距 */
+  padding: 20px 40px; /* 增加內邊距 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+  
+ 
+}
+.About_text{
+  position: relative;
+  top:-80px
+}
+.About_text p {
+  font-size: 16px; /* 調整字體大小 */
+  line-height: 1.6; /* 增加行高 */
+  margin-bottom: 16px; /* 段落之間的間距 */
+  color: #333; /* 文字顏色 */
+}
+
+.About h1 {
+  font-size: 28px; /* 調整標題大小 */
+  margin-bottom: 20px; /* 標題與段落間距 */
+  color: #343a40; /* 標題顏色 */
+  text-align: center; /* 置中標題 */
+}
+.About_img {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  left: 500px;
+  top: -80px;
+}
+/* 這是首頁的部分*/
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 100px;
+}
+
+.Hero {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 5%;
+ 
+}
+
+.image-container {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #000000 !important;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+.section {
+  padding: 100px 20px;
+  min-height: 100vh;
+}
+/* 這是 聯絡我的部分*/
+.contact-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #f9f9f9; /* 設置背景色 */
+  border-radius: 10px; /* 設置圓角 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
+}
+
+.contact-content h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.contact-content p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-links a {
+  color: #333; /* 圖標顏色 */
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #007bff; /* 滑鼠懸停時圖標顏色變化 */
+}
+/* 這是作品的部分*/
+/* Portfolio Section Styles */
+.portfolio-section {
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 幻燈片樣式 */
+.portfolio-item {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.portfolio-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.portfolio-content {
+  padding: 10px;
+}
+
+.portfolio-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.portfolio-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.portfolio-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.portfolio-button:hover {
+  background-color: #0056b3;
+}
+
+/* Slick Customizations */
+.slick-prev, .slick-next {
+  font-size: 30px; /* 調整箭頭大小 */
+  z-index: 1; /* 確保箭頭在幻燈片上方 */
+  color: #000;
+}
+
+.slick-dots li button:before {
+  font-size: 12px; /* 調整導航點大小 */
+  color: #333;
+}
