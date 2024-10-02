@@ -11,21 +11,21 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Container className="">
+      
         {/* Hero 區塊 */}
-        <Row className="">
+        <Row >
           <Hero />
         </Row>
         {/* About 區塊 */}
-        <Row className="">
+        <Row >
           <About />
           <Portfolio />
         </Row>
         {/* Contact 區塊 */}
-        <Row className="">
+        <Row >
           <Contact />
         </Row>
-      </Container>
+      
     </div>
   );
 }

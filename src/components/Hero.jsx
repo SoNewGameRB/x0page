@@ -1,59 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 
-
 function Hero() {
-  const [images, setImages] = useState([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageVisible, setImageVisible] = useState(false); // 控制圖片是否顯示
+  const [scrollProgress, setScrollProgress] = useState(0); // 进度条的状态
+  const heroRef = useRef(null);
 
-  const imageRef = useRef(null);
-
-  // 獲取圖片數據的函數
+  // 监控 Hero 组件是否进入视区
   useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const response = await axios.get(
-          'https://api.unsplash.com/photos/?client_id=JrCKpdzbt3hEt6v5EOulpNwRbtXtLIWg2hQoogMyNDQ'
+    const handleScroll = () => {
+      const heroElement = heroRef.current;
+      if (heroElement) {
+        const rect = heroElement.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const heroHeight = heroElement.offsetHeight;
+
+        // 当 Hero 底部进入视区 80% 时，结束读条
+        const progress = Math.min(
+          (windowHeight - rect.top) / (windowHeight + heroHeight * 0.5) * 100,
+          100
         );
-        setImages(response.data);
-      } catch (error) {
-        console.error('Error fetching images:', error);
+
+        // 设置滚动进度
+        setScrollProgress(progress);
       }
     };
 
-    fetchImages();
-  }, []);
-
-  // 設置 IntersectionObserver 來監控圖片進入視窗
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setImageVisible(true); // 當圖片進入視窗時顯示
-        }
-      },
-      { threshold: 0.5 } // 當圖片一半進入畫面時觸發
-    );
-
-    if (imageRef.current) {
-      observer.observe(imageRef.current);
-    }
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      if (imageRef.current) {
-        observer.unobserve(imageRef.current);
-      }
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  // 切換圖片的函數
-  const changeImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
 
   return (
     <motion.div
@@ -62,27 +39,21 @@ function Hero() {
       initial={{ opacity: 0, x: '-100vw' }} // 卡片滑入效果
       animate={{ opacity: 1, x: 0 }}
       transition={{ type: 'spring', stiffness: 50, duration: 1 }}
+      ref={heroRef}
     >
-      <div className="hero-content">
-        <h1>這是我嘗試的作品集</h1>
-        <p>希望可以轉職到前端</p>
-        {/* 顯示當前圖片，僅當 imageVisible 為 true 時顯示圖片 */}
-        {images.length > 0 && (
-          <div ref={imageRef} className="image-card">
-            {imageVisible && (
-              <motion.img
-                src={images[currentImageIndex].urls.regular}
-                alt={images[currentImageIndex].alt_description}
-                className="image"
-                whileHover={{ opacity: 0.5 }} // 滑鼠懸停時變暗
-              />
-            )}
-          </div>
-        )}
-        {/* 點擊按鈕切換圖片 */}
-        <button onClick={changeImage} className="change-image-btn">
-          下一張圖片
-        </button>
+      {/* 进度条区域，显示人物图示 */}
+      <div className="progress-bar-container">
+        <div className="progress-bar" style={{ width: `${scrollProgress}%` }}>
+          <motion.div
+            className="progress-icon"
+            initial={{ x: 0 }}
+            animate={{ x: scrollProgress + '%' }}
+            transition={{ type: 'spring', stiffness: 100, duration: 0.5 }}
+          >
+            {/* 使用一个大一点的人物的图示 */}
+            🧑‍🚀 {/* 根据需求替换成任何你喜欢的图示 */}
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   );

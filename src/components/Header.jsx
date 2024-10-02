@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-scroll';
-
-import { FaBars } from 'react-icons/fa'; // 使用 react-icons 的 FaBars 作為圓形圖示
+import { FaBars } from 'react-icons/fa'; 
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -10,10 +9,13 @@ function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      if (offset > 300) { // 滾動超過廣告高度
+      
+      // 當滾動超過300px時，顯示浮動圖示，否則隱藏它
+      if (offset > 300) {
         setScrolled(true);
       } else {
         setScrolled(false);
+        setShowMobileNav(false);  // 當滾動回到頂部時自動隱藏導航列
       }
     };
 
@@ -25,7 +27,7 @@ function Header() {
   }, []);
 
   const toggleMobileNav = () => {
-    setShowMobileNav(!showMobileNav); // 切換導航顯示
+    setShowMobileNav(!showMobileNav); 
   };
 
   return (
@@ -33,11 +35,9 @@ function Header() {
       {/* 廣告區域 */}
       <div className="ad-banner">
         <div className="ad-content">
-          <div className="ad-image">
-            <img src="https://via.placeholder.com/150" alt="Ad" />
-          </div>
           <div className="ad-text">
-            <h2>他是廣告</h2>
+            <h2>前端開發作品集</h2>
+            <p>探索我的最新專案和技術技能</p>
           </div>
         </div>
       </div>
@@ -52,22 +52,18 @@ function Header() {
         </nav>
       )}
 
-      {/* 滾動後右下角出現的圓形圖示 */}
       {scrolled && (
         <div className="floating-icon" onClick={toggleMobileNav}>
           <FaBars size={30} color="white" />
         </div>
       )}
 
-      {/* 點擊後顯示的垂直導航列 */}
-      {showMobileNav && (
-        <div className="floating-nav">
-          <Link to="hero" smooth={true} duration={500} className="nav-item">首頁</Link>
-          <Link to="about" smooth={true} duration={500} className="nav-item">關於</Link>
-          <Link to="portfolio" smooth={true} duration={500} className="nav-item">作品</Link>
-          <Link to="contact" smooth={true} duration={500} className="nav-item">聯絡</Link>
-        </div>
-      )}
+      <div className={`floating-nav ${showMobileNav ? 'show' : ''}`}>
+        <Link to="hero" smooth={true} duration={500} className="nav-item">首頁</Link>
+        <Link to="about" smooth={true} duration={500} className="nav-item">關於</Link>
+        <Link to="portfolio" smooth={true} duration={500} className="nav-item">作品</Link>
+        <Link to="contact" smooth={true} duration={500} className="nav-item">聯絡</Link>
+      </div>
     </>
   );
 }
