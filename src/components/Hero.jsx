@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+
 
 function Hero() {
   const [images, setImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageVisible, setImageVisible] = useState(false); // 控制圖片是否顯示
+
+  const imageRef = useRef(null);
 
   // 獲取圖片數據的函數
   useEffect(() => {
@@ -22,6 +26,28 @@ function Hero() {
     fetchImages();
   }, []);
 
+  // 設置 IntersectionObserver 來監控圖片進入視窗
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setImageVisible(true); // 當圖片進入視窗時顯示
+        }
+      },
+      { threshold: 0.5 } // 當圖片一半進入畫面時觸發
+    );
+
+    if (imageRef.current) {
+      observer.observe(imageRef.current);
+    }
+
+    return () => {
+      if (imageRef.current) {
+        observer.unobserve(imageRef.current);
+      }
+    };
+  }, []);
+
   // 切換圖片的函數
   const changeImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -31,27 +57,30 @@ function Hero() {
 
   return (
     <motion.div
-    id="hero" // 確保最外層元素有 id 屬性
+      id="hero"
       className="hero-section"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
+      initial={{ opacity: 0, x: '-100vw' }} // 卡片滑入效果
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ type: 'spring', stiffness: 50, duration: 1 }}
     >
-      <div className="Hero">
+      <div className="hero-content">
         <h1>這是我嘗試的作品集</h1>
         <p>希望可以轉職到前端</p>
-        {/* 顯示當前圖片 */}
+        {/* 顯示當前圖片，僅當 imageVisible 為 true 時顯示圖片 */}
         {images.length > 0 && (
-          <div className="image-container">
-            <img
-              src={images[currentImageIndex].urls.regular}
-              alt={images[currentImageIndex].alt_description}
-              style={{ width: '100%', maxWidth: '400px', borderRadius: '10px' }}
-            />
+          <div ref={imageRef} className="image-card">
+            {imageVisible && (
+              <motion.img
+                src={images[currentImageIndex].urls.regular}
+                alt={images[currentImageIndex].alt_description}
+                className="image"
+                whileHover={{ opacity: 0.5 }} // 滑鼠懸停時變暗
+              />
+            )}
           </div>
         )}
         {/* 點擊按鈕切換圖片 */}
-        <button onClick={changeImage} style={{ marginTop: '20px' }}>
+        <button onClick={changeImage} className="change-image-btn">
           下一張圖片
         </button>
       </div>

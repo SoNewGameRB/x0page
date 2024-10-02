@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 function Portfolio() {
     // 示例項目數據，可以替換成實際項目數據
     const projects = [
@@ -19,12 +20,11 @@ function Portfolio() {
         link: 'https://sonewgamerb.github.io/snake-game/'
       },
       {
-        title: 'Project 3',
-        description: 'This is my third project.',
-        image: 'https://via.placeholder.com/600x400',
-        link: 'https://github.com/your-repo/project3'
+        title: '貪吃蛇',
+        description: 'This is my second project.',
+        image: 'https://github.com/SoNewGameRB/snake-game/blob/main/public/images/%E8%B2%AA%E5%90%83%E8%9B%87.png?raw=true/600x400',
+        link: 'https://sonewgamerb.github.io/snake-game/'
       },
-      // 可以繼續添加更多項目
     ];
   
     // Slick Carousel 設置
@@ -47,8 +47,6 @@ function Portfolio() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        
-       
         <Slider {...settings}>
           {projects.map((project, index) => (
             <div key={index} className="portfolio-item">

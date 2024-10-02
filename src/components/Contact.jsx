@@ -2,10 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram, FaFacebook, FaEnvelope } from 'react-icons/fa'; // 引入所需的圖標
 
+
 function Contact() {
   return (
     <motion.div
-      id="contact" // 確保最外層元素有 id 屬性
+      id="contact"
       className="contact-section"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -17,15 +18,15 @@ function Contact() {
         <div className="social-links">
           {/* IG 連結 */}
           <a href="https://www.instagram.com/stupid_1011" target="_blank" rel="noopener noreferrer">
-            <FaInstagram size={40} style={{ margin: '10px' }} />
+            <FaInstagram className="social-icon" />
           </a>
           {/* Facebook 連結 */}
           <a href="https://www.facebook.com/stupidboy.lin.33" target="_blank" rel="noopener noreferrer">
-            <FaFacebook size={40} style={{ margin: '10px' }} />
+            <FaFacebook className="social-icon" />
           </a>
           {/* Email 連結 */}
           <a href="mailto:stupidlin11@gmail.com" target="_blank" rel="noopener noreferrer">
-            <FaEnvelope size={40} style={{ margin: '10px' }} />
+            <FaEnvelope className="social-icon" />
           </a>
         </div>
       </div>
