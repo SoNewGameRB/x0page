@@ -2,7 +2,8 @@
 .ad-banner {
   position: relative;
   height: 100vh;
-  background-image: url('public/images/d0dac1ef-0a20-4566-aa3b-b74604bab99a.webp');
+  background-image: url('/images/d0dac1ef-0a20-4566-aa3b-b74604bab99a.webp');
+
   background-size: cover;
   background-position: center;
   display: flex;
